@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, DragEvent, useEffect } from "react"
-import { Sparkles, GraduationCap, Target, Award, Globe, BookOpen, Loader2, Upload, FileText, X, ArrowRight, Trash2 } from "lucide-react"
+import { useState, DragEvent, useEffect, useRef } from "react"
+import { Sparkles, Loader2, Upload, FileText, X, ArrowRight, Trash2, AlertCircle } from "lucide-react"
 import { useTranslation, interpolate } from "@/lib/i18n"
 import { useStore } from "@/lib/store"
 
@@ -18,12 +18,14 @@ export function StepUpload({
   profileData: initialProfileData,
   onAnalyze,
   isAnalyzing = false,
+  errorMessage = null,
   onNext
 }: {
   fullExtractedText?: string
   profileData?: any
   onAnalyze?: (files: File[]) => void
   isAnalyzing?: boolean
+  errorMessage?: string | null
   onNext?: () => void
 }) {
   const { t } = useTranslation()
@@ -31,6 +33,9 @@ export function StepUpload({
   const [files, setFiles] = useState<File[]>([])
   const [isDragging, setIsDragging] = useState(false)
   const [profileData, setLocalProfileData] = useState<any>(initialProfileData || null)
+
+  // Ref de controle para travar chamadas repetidas no useEffect e impedir loops infinitos
+  const analyzedFilesCountRef = useRef<number>(0)
 
   // Recupera dados salvos no localStorage ao montar o componente (Persistência de Sessão)
   useEffect(() => {
@@ -51,16 +56,23 @@ export function StepUpload({
     }
   }, [initialProfileData, setProfileData])
 
+  // Disparo controlado de análise com trava contra loops repetidos
   useEffect(() => {
-    if (onAnalyze && files.length > 0) {
+    if (
+      onAnalyze &&
+      files.length > 0 &&
+      files.length > analyzedFilesCountRef.current &&
+      !isAnalyzing
+    ) {
+      analyzedFilesCountRef.current = files.length
       onAnalyze(files)
     }
-  }, [files, onAnalyze])
+  }, [files, onAnalyze, isAnalyzing])
 
   const processAndAnalyzeFiles = (newFiles: File[]) => {
     setFiles((prevFiles) => {
-      const existingNames = new Set(prevFiles.map(f => f.name))
-      const filteredNew = newFiles.filter(f => !existingNames.has(f.name))
+      const existingNames = new Set(prevFiles.map((f) => f.name))
+      const filteredNew = newFiles.filter((f) => !existingNames.has(f.name))
       return [...prevFiles, ...filteredNew]
     })
   }
@@ -95,7 +107,11 @@ export function StepUpload({
   }
 
   const removeFile = (index: number) => {
-    setFiles((prev) => prev.filter((_, i) => i !== index))
+    setFiles((prev) => {
+      const updated = prev.filter((_, i) => i !== index)
+      analyzedFilesCountRef.current = updated.length
+      return updated
+    })
   }
 
   // Função para limpar dados e reiniciar o estado do passo 1
@@ -103,6 +119,7 @@ export function StepUpload({
     setFiles([])
     setLocalProfileData(null)
     setProfileData(null)
+    analyzedFilesCountRef.current = 0
     try {
       localStorage.removeItem("user_profile_analysis")
     } catch (e) {
@@ -111,7 +128,12 @@ export function StepUpload({
   }
 
   const initials = profileData?.nome
-    ? profileData.nome.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()
+    ? profileData.nome
+        .split(" ")
+        .map((n: string) => n[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase()
     : "CP"
 
   return (
@@ -127,6 +149,17 @@ export function StepUpload({
             <Trash2 className="w-3.5 h-3.5" />
             Limpar Dados e Recomeçar
           </button>
+        </div>
+      )}
+
+      {/* Caixa de Erro Tratado (ex: Erro 429 ou Falha de Rede) */}
+      {errorMessage && (
+        <div className="p-4 rounded-xl border border-red-500/30 bg-red-500/10 text-red-400 flex items-start gap-3 text-sm animate-in fade-in">
+          <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+          <div>
+            <h5 className="font-semibold mb-0.5">Atenção ao processar arquivo:</h5>
+            <p className="text-xs text-red-300/90 leading-relaxed">{errorMessage}</p>
+          </div>
         </div>
       )}
 
@@ -149,7 +182,11 @@ export function StepUpload({
           onChange={handleFileChange}
         />
         <label htmlFor="file-upload" className="cursor-pointer flex flex-col items-center gap-3">
-          <div className={`p-3 rounded-full transition-colors ${isDragging ? "bg-blue-500/30 text-blue-300" : "bg-blue-500/10 text-blue-400"}`}>
+          <div
+            className={`p-3 rounded-full transition-colors ${
+              isDragging ? "bg-blue-500/30 text-blue-300" : "bg-blue-500/10 text-blue-400"
+            }`}
+          >
             <Upload className="w-8 h-8" />
           </div>
           <div>
@@ -171,10 +208,17 @@ export function StepUpload({
           </h4>
           <div className="flex flex-wrap gap-2">
             {files.map((file, idx) => (
-              <div key={idx} className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-xs text-slate-200">
+              <div
+                key={idx}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700 text-xs text-slate-200"
+              >
                 <FileText className="w-3.5 h-3.5 text-blue-400" />
                 <span className="truncate max-w-[200px]">{file.name}</span>
-                <button type="button" onClick={() => removeFile(idx)} className="text-slate-400 hover:text-red-400 cursor-pointer">
+                <button
+                  type="button"
+                  onClick={() => removeFile(idx)}
+                  className="text-slate-400 hover:text-red-400 cursor-pointer"
+                >
                   <X className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -220,7 +264,10 @@ export function StepUpload({
               </h4>
               <div className="flex flex-wrap gap-2">
                 {profileData.competencias.map((skill: string, idx: number) => (
-                  <span key={idx} className="px-3 py-1 rounded-md bg-slate-800 text-slate-200 border border-slate-700 text-xs font-medium">
+                  <span
+                    key={idx}
+                    className="px-3 py-1 rounded-md bg-slate-800 text-slate-200 border border-slate-700 text-xs font-medium"
+                  >
                     {skill}
                   </span>
                 ))}
@@ -235,8 +282,6 @@ export function StepUpload({
           </div>
         </div>
       )}
-
-      {/* Bloco de recomendações estratégicas removido com sucesso da Tela 1 conforme diretriz */}
 
       {profileData && !isAnalyzing && onNext && (
         <div className="flex justify-end pt-4">

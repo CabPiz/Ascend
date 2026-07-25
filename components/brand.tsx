@@ -9,7 +9,7 @@ export function Brand({ className, compact = false, showLanguageSelector = true 
         </span>
         {!compact && (
           <div className="leading-tight">
-            <p className="text-sm font-semibold tracking-tight text-foreground">AscendIT</p>
+            <p className="text-sm font-semibold tracking-tight text-foreground">Ascend</p>
             <p className="text-[11px] text-muted-foreground">Preparação Adaptativa para Provas</p>
           </div>
         )}

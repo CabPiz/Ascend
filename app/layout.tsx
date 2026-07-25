@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'AscendIT — AI Adaptive Exam Prep for Elite IT Contests',
+  title: 'Ascend — AI Adaptive Exam Prep for Elite IT Contests',
   description:
     'AI-powered adaptive preparation platform for high-level IT public contests. Career onboarding, zero-to-hero mastery roadmaps, an AI professor, and full official exam simulations.',
   generator: 'v0.app',

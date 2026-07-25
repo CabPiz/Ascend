@@ -6,12 +6,20 @@ export async function POST(request: Request) {
     const { extractedText, action } = await request.json()
 
     if (!extractedText) {
-      return NextResponse.json({ error: "Texto não fornecido" }, { status: 400 })
+      return NextResponse.json({ error: "Texto não fornecido." }, { status: 400 })
     }
+
+    // Proteção contra estouro de contexto e de limite de cota da API (Groq)
+    const MAX_TEXT_LENGTH = 35000
+    const sanitizedText =
+      extractedText.length > MAX_TEXT_LENGTH
+        ? extractedText.slice(0, MAX_TEXT_LENGTH) +
+          "\n\n[AVISO SISTEMA: Texto truncado em 35.000 caracteres para preservação de limite de tokens da API.]"
+        : extractedText
 
     const apiKey = process.env.GROQ_API_KEY
     if (!apiKey) {
-      return NextResponse.json({ error: "GROQ_API_KEY não configurada." }, { status: 500 })
+      return NextResponse.json({ error: "GROQ_API_KEY não configurada no servidor." }, { status: 500 })
     }
 
     const groq = new Groq({ apiKey })
@@ -22,7 +30,7 @@ export async function POST(request: Request) {
         Você é um especialista em recrutamento executivo de TI.
         Analise o texto consolidado de TODOS os documentos do candidato (currículo, histórico escolar, certificações):
         
-        ${extractedText}
+        ${sanitizedText}
 
         Retorne estritamente um JSON com a consolidação UNIFICADA de todo o histórico:
         {
@@ -49,7 +57,7 @@ export async function POST(request: Request) {
         Você é um mentor executivo de carreiras de TI e concursos de alto nível.
         Examine o histórico e currículo do candidato abaixo:
         
-        ${extractedText}
+        ${sanitizedText}
 
         DIRETRIZES DE ANÁLISE:
         1. Avalie o que o candidato JÁ POSSUI no currículo/histórico (ex: se já tem pós-graduação, MBA, certificações, mestrado ou soft skills demonstradas).
@@ -85,8 +93,22 @@ export async function POST(request: Request) {
       return NextResponse.json(JSON.parse(completion.choices[0]?.message?.content || "{}"))
     }
 
-    return NextResponse.json({ error: "Ação inválida" }, { status: 400 })
+    return NextResponse.json({ error: "Ação inválida." }, { status: 400 })
   } catch (error: any) {
-    return NextResponse.json({ error: error?.message || "Erro no servidor" }, { status: 500 })
+    console.error("Erro no processamento da API de análise:", error)
+
+    // Tratamento de Erro 429 (Rate Limit / Excesso de Cota)
+    const isRateLimit =
+      error?.status === 429 ||
+      error?.message?.includes("429") ||
+      error?.message?.includes("rate_limit") ||
+      error?.message?.includes("quota")
+
+    const statusCode = isRateLimit ? 429 : 500
+    const errorMessage = isRateLimit
+      ? "O limite de cota de requisições do provedor de IA foi atingido temporariamente. Por favor, aguarde de 1 a 2 minutos e tente novamente."
+      : error?.message || "Ocorreu um erro interno ao processar os documentos."
+
+    return NextResponse.json({ error: errorMessage }, { status: statusCode })
   }
 }

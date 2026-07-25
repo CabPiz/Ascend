@@ -10,7 +10,7 @@ import type {
   SimulationState,
 } from "./types"
 
-const STORAGE_KEY = "ascendit:v1"
+const STORAGE_KEY = "ascend:v1"
 
 function buildInitialModuleProgress(): Record<string, ModuleProgress> {
   const progress: Record<string, ModuleProgress> = {}

@@ -13,7 +13,7 @@
     "onSite": "On-site"
   },
   "appShell": {
-    "panelTitle": "AscendIT Preparation Panel"
+    "panelTitle": "Ascend Preparation Panel"
   },
   "onboarding": {
     "stepProgress": "Step {current} of {total}",

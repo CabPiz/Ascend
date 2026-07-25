@@ -1,0 +1,120 @@
+{
+  "common": {
+    "back": "Volver",
+    "board": "Banca",
+    "month": "mes",
+    "vacancy": "vacante",
+    "vacancies": "vacantes",
+    "loading": "Cargando tu espacio de preparación…"
+  },
+  "workMode": {
+    "remote": "100% Remoto",
+    "hybrid": "Híbrido",
+    "onSite": "Presencial"
+  },
+  "appShell": {
+    "panelTitle": "Panel de Preparación AscendIT"
+  },
+  "onboarding": {
+    "stepProgress": "Paso {current} de {total}",
+    "steps": [
+      { "title": "Perfil", "subtitle": "Envío de currículum" },
+      { "title": "Objetivo", "subtitle": "Elección del concurso" },
+      { "title": "Inscripción", "subtitle": "Confirmación y plazos" }
+    ]
+  },
+  "upload": {
+    "dropHere": "Suelta los archivos aquí...",
+    "dragDrop": "Arrastra y suelta tu currículum o historial académico",
+    "fileTypes": "PDF, DOCX o TXT · Lectura automatizada por IA",
+    "addFiles": "Agregar archivos",
+    "attachedDocs": "Documentos Adjuntos ({count})",
+    "analyzing": "Leyendo y consolidando currículum e historial académico vía IA...",
+    "candidate": "Candidato",
+    "mappedProfile": "Perfil Mapeado",
+    "executiveSummary": "Resumen Profesional Consolidado",
+    "hardSkills": "Hard Skills Consolidadas (Currículum + Formación)",
+    "mappingGaps": "Mapeando brechas y plan de carrera...",
+    "improveProfile": "Cómo mejorar mi perfil profesional",
+    "strategicPlan": "Plan Estratégico de Mejora Profesional",
+    "softSkills": "Soft Skills Recomendadas",
+    "postGrad": "Posgrados y MBAs",
+    "research": "Investigación & Posgrado",
+    "thesis": "Tesis",
+    "certifications": "Certificaciones Estratégicas",
+    "international": "Oportunidades Internacionales",
+    "nextStep": "Avanzar a Elección de Concurso"
+  },
+  "goals": {
+    "title": "Filtrar cargos de alto nivel",
+    "subtitle": "Selecciona el concurso público ideal según remuneración y modalidad de trabajo.",
+    "criteria": "Criterios de Selección",
+    "searchPlaceholder": "Buscar cargo, organismo o tecnología...",
+    "remoteOnly": "100% Remoto",
+    "minSalary": "Salario mínimo:",
+    "contestFound": "concurso encontrado",
+    "contestsFound": "concursos encontrados",
+    "noResults": "Ningún concurso cumple con los filtros seleccionados. Intenta relajar los criterios de búsqueda.",
+    "viewDetails": "Ver detalles de inscripción"
+  },
+  "contestStep": {
+    "noSelection": "Ningún concurso seleccionado. Por favor, vuelve y elige un objetivo.",
+    "deadlineTitle": "Plazo límite de inscripción",
+    "registrationUntil": "Inscripciones hasta: {date}",
+    "daysLeft": "Faltan {days} días",
+    "registrationClosed": "Inscripciones cerradas",
+    "officialPage": "Ir a la página oficial de inscripción",
+    "boardDetection": "Identificación Automática de la Banca Examinadora",
+    "trapPatterns": "Patrones de trampas de la banca {board} para entrenar",
+    "defaultBoardStyle": "Estilo de evaluación estándar.",
+    "defaultTrap": "Análisis detallado de enunciados.",
+    "complete": "Completar Onboarding e Iniciar Entrenamiento"
+  },
+  "countdown": {
+    "expired": "Inscripciones cerradas",
+    "deadline": "Plazo límite de inscripción",
+    "days": "DÍAS",
+    "hours": "HORAS",
+    "minutes": "MIN",
+    "seconds": "SEG"
+  },
+  "dashboard": {
+    "preparingFor": "Preparándose para {title} · {org}",
+    "adaptivePanel": "Panel de Estudio Adaptativo",
+    "welcomeBack": "Bienvenido de nuevo, {name}",
+    "modulesCompleted": "Módulos Completados",
+    "weakTopics": "Temas Débiles",
+    "topic": "tema",
+    "topics": "temas",
+    "clickToPractice": "Clic para practicar",
+    "nextReview": "Próxima Revisión",
+    "pendingToday": "Pendiente hoy",
+    "allCaughtUp": "Todo al día",
+    "overallMastery": "Dominio General",
+    "masteryStart": "Estás comenzando en 0%. Completa cada módulo al 100% para avanzar.",
+    "masteryComplete": "¡Dominio total alcanzado! Estás listo para el examen.",
+    "masteryProgress": "Sigue completando módulos para aumentar tu nivel de dominio.",
+    "learningPath": "Ruta de Aprendizaje de Cero a Experto",
+    "learningPathHint": "Cada módulo se desbloquea solo cuando el anterior se completa al 100%.",
+    "allMastered": "¡Todos los módulos dominados! Ve al Centro de Simulaciones para probar tus conocimientos en condiciones reales de examen.",
+    "weakTopicsTitle": "Temas Débiles Mapeados",
+    "weakTopicsHint": "Temas con menor tasa de acierto que necesitan refuerzo.",
+    "practiceNow": "Practicar Ahora",
+    "noWeakTopics": "¡Ningún tema débil por el momento! Tu rendimiento es excelente.",
+    "close": "Cerrar",
+    "candidate": "Candidato"
+  },
+  "sidebar": {
+    "studyPanel": "Panel de Estudios",
+    "examSimulations": "Simulaciones de Examen",
+    "overallMastery": "Dominio General",
+    "targetContest": "Concurso Objetivo",
+    "registrationUntil": "Inscripciones hasta: {date}",
+    "daysLeft": "Faltan {days} días",
+    "officialRegistration": "Página Oficial de Inscripción",
+    "resetConfirm": "¿Deseas restablecer todo el progreso y empezar de nuevo?",
+    "resetProgress": "Restablecer progreso",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  }
+}

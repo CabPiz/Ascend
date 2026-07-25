@@ -1,0 +1,120 @@
+{
+  "common": {
+    "back": "Back",
+    "board": "Board",
+    "month": "month",
+    "vacancy": "vacancy",
+    "vacancies": "vacancies",
+    "loading": "Loading your preparation workspace…"
+  },
+  "workMode": {
+    "remote": "100% Remote",
+    "hybrid": "Hybrid",
+    "onSite": "On-site"
+  },
+  "appShell": {
+    "panelTitle": "AscendIT Preparation Panel"
+  },
+  "onboarding": {
+    "stepProgress": "Step {current} of {total}",
+    "steps": [
+      { "title": "Profile", "subtitle": "Resume upload" },
+      { "title": "Goal", "subtitle": "Contest selection" },
+      { "title": "Registration", "subtitle": "Confirmation & deadlines" }
+    ]
+  },
+  "upload": {
+    "dropHere": "Drop files here...",
+    "dragDrop": "Drag and drop your resume or academic transcript",
+    "fileTypes": "PDF, DOCX or TXT · AI-powered automated reading",
+    "addFiles": "Add files",
+    "attachedDocs": "Attached Documents ({count})",
+    "analyzing": "Reading and consolidating resume and academic records via AI...",
+    "candidate": "Candidate",
+    "mappedProfile": "Mapped Profile",
+    "executiveSummary": "Consolidated Professional Summary",
+    "hardSkills": "Consolidated Hard Skills (Resume + Education)",
+    "mappingGaps": "Mapping gaps and career plan...",
+    "improveProfile": "How to improve my professional profile",
+    "strategicPlan": "Strategic Professional Development Plan",
+    "softSkills": "Recommended Soft Skills",
+    "postGrad": "Post-Graduate Programs & MBAs",
+    "research": "Research & Graduate Studies",
+    "thesis": "Thesis",
+    "certifications": "Strategic Certifications",
+    "international": "International Opportunities",
+    "nextStep": "Continue to Contest Selection"
+  },
+  "goals": {
+    "title": "Filter senior-level positions",
+    "subtitle": "Select the ideal public IT contest based on compensation and work modality.",
+    "criteria": "Selection Criteria",
+    "searchPlaceholder": "Search role, agency or technology...",
+    "remoteOnly": "100% Remote",
+    "minSalary": "Minimum salary:",
+    "contestFound": "contest found",
+    "contestsFound": "contests found",
+    "noResults": "No contests match the selected filters. Try relaxing your search criteria.",
+    "viewDetails": "View registration details"
+  },
+  "contestStep": {
+    "noSelection": "No contest selected. Please go back and choose a goal.",
+    "deadlineTitle": "Registration deadline",
+    "registrationUntil": "Registration until: {date}",
+    "daysLeft": "{days} days left",
+    "registrationClosed": "Registration closed",
+    "officialPage": "Go to official registration page",
+    "boardDetection": "Automatic Exam Board Identification",
+    "trapPatterns": "Trap patterns from {board} board to practice",
+    "defaultBoardStyle": "Standard evaluation style.",
+    "defaultTrap": "Detailed statement analysis.",
+    "complete": "Complete Onboarding & Start Training"
+  },
+  "countdown": {
+    "expired": "Registration closed",
+    "deadline": "Registration deadline",
+    "days": "DAYS",
+    "hours": "HOURS",
+    "minutes": "MIN",
+    "seconds": "SEC"
+  },
+  "dashboard": {
+    "preparingFor": "Preparing for {title} · {org}",
+    "adaptivePanel": "Adaptive Study Panel",
+    "welcomeBack": "Welcome back, {name}",
+    "modulesCompleted": "Modules Completed",
+    "weakTopics": "Weak Topics",
+    "topic": "topic",
+    "topics": "topics",
+    "clickToPractice": "Click to practice",
+    "nextReview": "Next Review",
+    "pendingToday": "Pending today",
+    "allCaughtUp": "All caught up",
+    "overallMastery": "Overall Mastery",
+    "masteryStart": "You're starting at 0%. Complete each module at 100% to progress.",
+    "masteryComplete": "Full mastery achieved! You're ready for the exam.",
+    "masteryProgress": "Keep completing modules to increase your mastery level.",
+    "learningPath": "Zero-to-Hero Learning Path",
+    "learningPathHint": "Each module unlocks only when the previous one is completed at 100%.",
+    "allMastered": "All modules mastered! Go to the Simulation Center to test your knowledge under real exam conditions.",
+    "weakTopicsTitle": "Mapped Weak Topics",
+    "weakTopicsHint": "Topics with lower accuracy rates that need reinforcement.",
+    "practiceNow": "Practice Now",
+    "noWeakTopics": "No weak topics at the moment! Your performance is excellent.",
+    "close": "Close",
+    "candidate": "Candidate"
+  },
+  "sidebar": {
+    "studyPanel": "Study Panel",
+    "examSimulations": "Exam Simulations",
+    "overallMastery": "Overall Mastery",
+    "targetContest": "Target Contest",
+    "registrationUntil": "Registration until: {date}",
+    "daysLeft": "{days} days left",
+    "officialRegistration": "Official Registration Page",
+    "resetConfirm": "Do you want to reset all progress and start over?",
+    "resetProgress": "Reset progress",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  }
+}

@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils"
 import { extractTextFromPDF, analyzeProfileWithGemini } from "@/lib/gemini-parser"
 
 export function OnboardingWizard() {
-  const { state, setOnboardingStep } = useStore()
+  const { state, setOnboardingStep, setProfileData: setStoreProfileData } = useStore()
   const { t } = useTranslation()
   const step = state.onboardingStep
 
@@ -49,16 +49,30 @@ export function OnboardingWizard() {
 
       const analysis = await analyzeProfileWithGemini(combinedText)
       setProfileData(analysis)
+      setStoreProfileData(analysis)
+
+      // Persistência em localStorage para sincronização entre passos
+      try {
+        localStorage.setItem(
+          "user_profile_analysis",
+          JSON.stringify({
+            profile: analysis,
+            extractedText: combinedText,
+            analyzedAt: new Date().toISOString(),
+          })
+        )
+      } catch (e) {
+        console.error("Erro ao gravar cache no localStorage:", e)
+      }
     } catch (error: any) {
       console.error("Erro na análise dos arquivos:", error)
-      
+
       const errorStr = error?.message || String(error)
       if (errorStr.includes("429") || errorStr.includes("Rate limit")) {
-        // Tenta extrair os segundos ou minutos informados no erro da API
         const matchMinutes = errorStr.match(/try again in (\d+)m([\d.]+)s/)
         const matchSeconds = errorStr.match(/try again in ([\d.]+)s/)
-        
-        let totalSeconds = 600 // Padrão de 10 minutos caso não encontre
+
+        let totalSeconds = 600
         if (matchMinutes) {
           const mins = parseInt(matchMinutes[1], 10)
           const secs = parseFloat(matchMinutes[2])
@@ -69,12 +83,12 @@ export function OnboardingWizard() {
 
         setRateLimitError({
           message: `Limite de requisições excedido. Cota esgotada no momento.`,
-          retryAfterSeconds: totalSeconds
+          retryAfterSeconds: totalSeconds,
         })
       } else {
         setRateLimitError({
           message: errorStr || "Erro ao processar análise do perfil.",
-          retryAfterSeconds: 0
+          retryAfterSeconds: 0,
         })
       }
     } finally {

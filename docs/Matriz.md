@@ -14,10 +14,14 @@
 1. **Regra de Ouro contra Suposições:** Nunca assumir dados ocultos ou inventar códigos sem validação prévia. Antes de sugerir a edição de qualquer arquivo de código-fonte local, é obrigatório realizar a leitura prévia do respectivo arquivo nas fontes.
 2. **Encapsulamento Obrigatório em Box Markdown:** (`http://googleusercontent.com/immersive_entry_chip/0`)
 3. **Controle Dinâmico de Iteração:** Cada resposta da esteira incrementa estritamente +1 na contagem da iteração atual, utilizando rigorosamente o cabeçalho sequencial.
+4. **Idioma de resposta:** Sempre responder em português (pt-BR)
+5. **Manutençao de código fonte:** Sempre que for necessário dar manutenção no código-fonte para evoluir a ferramenta, solicite o arquivo de código-fonte para realizar a refatoração.
+
+---
 
 ## 3. Template Visual Atualizado e Obrigatório de Governança
 
-Todas as respostas de governança geradas pelo engenheiro/IA para o projeto AscendIT devem manter rigorosamente o seguinte cabeçalho sequencial encapsulada em um box de código Markdown garantindo o botão de cópia rápida:
+Todas as respostas de governança geradas pelo engenheiro/IA para o projeto AscendIT devem manter rigorosamente o seguinte cabeçalho sequencial encapsulada em um box de código Markdown garantindo o botão de cópia rápida. A linha "Mensagem de Commit Sugerida" só deve aparecer quando houver manutenção em arquivos de código fonte:
 ```markdown
 * **Iteração:** [Número]
 * **Data:** [DD/MM/YYYY HH:MM:SS]

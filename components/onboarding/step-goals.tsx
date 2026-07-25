@@ -63,10 +63,33 @@ export function StepGoals() {
       const savedData = localStorage.getItem("user_profile_analysis")
       let extractedText = ""
       let baseCandidate = state.profileData || {}
+
       if (savedData) {
-        const parsed = JSON.parse(savedData)
-        extractedText = parsed?.profile ? JSON.stringify(parsed.profile) : ""
-        if (parsed?.profile) baseCandidate = parsed.profile
+        try {
+          const parsed = JSON.parse(savedData)
+          extractedText = parsed?.extractedText || (parsed?.profile ? JSON.stringify(parsed.profile) : "")
+          if (parsed?.profile) baseCandidate = parsed.profile
+        } catch (e) {
+          console.error("Erro ao ler cache do localStorage:", e)
+        }
+      }
+
+      // Fallback: busca do Zustand se não encontrou no localStorage
+      if (!extractedText && state.profileData) {
+        extractedText =
+          typeof state.profileData === "string"
+            ? state.profileData
+            : JSON.stringify(state.profileData)
+      }
+
+      // Validação defensiva pré-requisito de payload
+      if (!extractedText || extractedText.trim() === "") {
+        setRateLimitError({
+          message: "Nenhum histórico ou currículo foi localizado para análise. Por favor, volte ao Passo 1 e reenvie seus arquivos.",
+          retryAfterSeconds: 0,
+        })
+        setLoadingRecs(false)
+        return
       }
 
       const res = await fetch("/api/analyze", {
@@ -111,6 +134,7 @@ export function StepGoals() {
       setProfileData(unifiedProfile)
       localStorage.setItem("user_profile_analysis", JSON.stringify({
         profile: unifiedProfile,
+        extractedText,
         recommendations: data,
         analyzedAt: new Date().toISOString()
       }))
@@ -294,7 +318,7 @@ export function StepGoals() {
         <div className="rounded-xl border border-amber-500/35 bg-amber-500/10 p-4 flex items-start gap-3 text-amber-300">
           <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
           <div className="text-xs space-y-1">
-            <p className="font-bold">Aviso sobre o limite de requisições:</p>
+            <p className="font-bold">Aviso do Sistema:</p>
             <p>{rateLimitError.message}</p>
             {rateLimitError.retryAfterSeconds > 0 && (
               <p className="text-amber-200/90 font-medium">

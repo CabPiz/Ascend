@@ -33,3 +33,54 @@ Todas as respostas de governança geradas pelo engenheiro/IA para o projeto Asce
 * **Gargalo / Risco Superado:** [Ex: Padronização de saídas em blocos de código]
 * **Mensagem de Commit Sugerida (Conventional Commits):** `tipo(escopo): descrição concisa da alteração`
 ```
+
+---
+
+## 4. **Protocolo de Bug Fix Intercorrente (Issue Bloqueante):**
+   Sempre que surgir um erro que bloqueie o progresso de uma issue
+   em andamento, o fluxo obrigatório é:
+
+   a. **Pausar** a issue atual (mantê-la como "In Progress").
+
+   b. **Criar uma nova issue:** solicitar ao Tech Lead (IA) os dois artefatos de `bug fix` no backlog com:
+
+      1. Título no formato:
+        **Padrão de título para Issues:**
+        - Bug fix:    [Bug] Descrição clara do problema encontrado
+        - Feature:    [Feature] Descrição da funcionalidade a implementar  
+        - Docs:       [Docs] Descrição do documento criado ou atualizado
+        - Chore:      [Chore] Descrição da tarefa de manutenção
+      A notação Conventional Commits (fix:, feat:, docs:) é exclusiva
+      da mensagem de commit — nunca deve aparecer no título da issue.
+
+      2. Descrição contendo: Problema, Solução Aplicada e Critério de Aceite.
+
+   c. **Mover a nova issue** imediatamente para "In Progress".
+
+   d. **Resolver o bug** e solicitar ao Tech Lead (IA) os quatro artefatos:
+
+      1. Criar branch de feature para a correção:
+         git checkout -b fix/nome-descritivo-da-correção
+
+      2. Commit da correção na branch:
+         git commit -m "fix(escopo): descrição concisa da correção"
+
+      3. Push da branch e abertura do Pull Request:
+         git push origin fix/nome-descritivo-da-correção
+         gh pr create --title "[Bug] Título da correção" \
+                      --body "Closes #N" \
+                      --base main
+
+      4. Merge do PR (fecha a issue e move o card no Kanban):
+         gh pr merge --squash --delete-branch
+
+      ⚠️ O fechamento automático da issue e a atualização do Kanban
+      só ocorrem via merge do PR na branch main. Commits diretos
+      nunca fecham issues automaticamente — por isso o fluxo de
+      branches + PR é obrigatório no padrão profissional.
+
+   e. **Confirmar** que a issue de bug fix foi para "Done" no Kanban.
+
+   f. **Retomar** a issue original que estava pausada.
+
+---

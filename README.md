@@ -4,8 +4,6 @@
 
 **Ascend** é uma plataforma de evolução profissional que gera trilhas de aprendizado personalizadas com base em três entradas: quem você é hoje, para onde você quer ir e o que o mercado exige agora. Não é um curso — é um sistema de orientação contínua que se adapta conforme você avança.
 
-O modelo central: **gratuito para quem está desempregado**. Quando o usuário é efetivado (verificado via LinkedIn OAuth + holerite), converte automaticamente para o plano Pro.
-
 🌐 [English](./README.en.md) · [Español](./README.es.md)
 
 ---
@@ -17,7 +15,6 @@ O modelo central: **gratuito para quem está desempregado**. Quando o usuário �
 - Calcula gap de competências e gera trilha priorizada com recursos curados
 - Cada fase tem tempo estimado e marcos mensuráveis (certificações, projetos)
 - Recalibra a trilha conforme o usuário avança ou o mercado muda
-- Verifica efetivação automaticamente → converte para Pro
 
 ---
 
@@ -27,16 +24,6 @@ O modelo central: **gratuito para quem está desempregado**. Quando o usuário �
 |---|---|---|
 | Mercado Privado | Profissionais em recolocação ou upgrade salarial (CLT/PJ) | Trilha baseada em cargo-alvo + salário desejado |
 | Concurso Público | Candidatos a cargos de TI em órgãos federais e estaduais | Trilha baseada em edital + banca + prazo |
-
----
-
-## Modelo de receita
-
-| Plano | Preço | Público |
-|---|---|---|
-| Recolocação | R$ 0 | Desempregados — 1 trilha ativa até ser efetivado |
-| Pro | R$ 79/mês | Empregados em crescimento contínuo |
-| Pro Anual | R$ 699/ano | ~R$ 58/mês |
 
 ---
 

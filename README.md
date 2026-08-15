@@ -4,6 +4,8 @@
 
 **Ascend** é uma plataforma de evolução profissional que gera trilhas de aprendizado personalizadas com base em três entradas: quem você é hoje, para onde você quer ir e o que o mercado exige agora. Não é um curso — é um sistema de orientação contínua que se adapta conforme você avança.
 
+O modelo central: **gratuito para quem está desempregado**. Quando o usuário é efetivado (verificado via Carteira de Trabalho digital do gov.br), converte automaticamente para o plano Pro.
+
 🌐 [English](./README.en.md) · [Español](./README.es.md)
 
 ---
